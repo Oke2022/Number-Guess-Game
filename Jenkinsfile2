@@ -29,7 +29,7 @@ pipeline {
 
          stage('Deploy to Tomcat') {
             steps {
-        scp -i Berv.pem target/*.jar ec2-user@18.117.103.110:/home/ec2-user/apache-tomcat-7.0.94/webapps
+        scp -i /home/ec2-user/Berv.pem target/*.jar ec2-user@18.117.103.110:/home/ec2-user/apache-tomcat-7.0.94/webapps
             }
         }
     }
