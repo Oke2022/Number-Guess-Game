@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'build' }
+    agent { label 'bervnodes' }
 
     // environment {
     //     JAVA_HOME = "/usr/lib/jvm/java-11-openjdk"
@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main', 
-                    credentialsId: 'github', 
+                    credentialsId: 'Githubtoken', 
                     url: 'https://github.com/Bervelyn123/Number-Guess-Game.git'
             }
         }
