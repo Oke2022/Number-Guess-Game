@@ -46,3 +46,4 @@ public class NumberGuessServletTest {
         servlet.doPost(request, response);
         assertTrue(responseWriter.toString().contains("Congratulations! You guessed the number!"));
     }
+}
