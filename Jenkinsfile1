@@ -29,7 +29,7 @@ pipeline {
 
         stage('Deploy to Tomcat') {
             steps {
-        scp -i KeyThree.pem target/*.jar ec2-user@98.84.168.229:/home/ec2-user/apache-tomcat-7.0.94/webapps
+        scp -i /home/ec2-user/KeyThree.pem target/*.jar ec2-user@98.84.168.229:/home/ec2-user/apache-tomcat-7.0.94/webapps
             }
         }
     }

@@ -29,7 +29,7 @@ pipeline {
 
         stage('Deploy to Tomcat') {
             steps {
-        scp -i wood.pem target/*.jar ec2-user@35.182.181.238:/home/ec2-user/apache-tomcat-7.0.94/webapps
+        scp -i /home/ec2-user/wood.pem target/*.jar ec2-user@35.182.181.238:/home/ec2-user/apache-tomcat-7.0.94/webapps
             }
         }
     }
