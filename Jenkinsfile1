@@ -1,65 +1,65 @@
-    pipeline {
-        agent any
+pipeline {
+    agent any
 
-        stages {
-            stage('Checkout Code') {
-                steps {
-                        git branch: 'main', 
-                        credentialsId: 'github', 
-                        url: 'https://github.com/Oke2022/Number-Guess-Game.git'
-                }
-            }
-
-            stage('Build') {
-                steps {
-                    sh '''
-                    ls
-                    mvn clean package -DskipTests
-                    '''   // Compile Java project using Maven
-                }
-            }
-
-            stage('Test') {
-                steps {
-                    sh '''
-                    ls
-                    mvn test
-                    '''  
-                }
-            }
-        stage('Test Report') {
-                steps {
-                    junit '**/target/surefire-reports/*.xml'  // Publish JUnit test results
-                }
-            }
-    stage('Artifactory Deployment') {
-                steps {
-                    script { 
-                    sh '''
-                        mvn deploy 
-                        '''
-                        }            
-                }
-            }
-
-            stage('Deploy to Tomcat') {
-                steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'tomcat', keyFileVariable: 'private_key', usernameVariable: 'username')]) {
-                sh '''
-                    ls
-                scp -i $private_key -o StrictHostKeyChecking=no -r target/NumberGuessGame*.war ec2-user@172.31.17.145:/home/ec2-user/apache-tomcat-7.0.94/webapps/
-                    '''
-                }
-                }
+    stages {
+        stage('Checkout Code') {
+            steps {
+                    git branch: 'main', 
+                    credentialsId: 'github', 
+                    url: 'https://github.com/Oke2022/Number-Guess-Game.git'
             }
         }
 
-    post {
-                success{
-                    echo 'Build and deployment successful'
-                }
-                failure{
-                    echo 'Build failed, check logs for details'
-                }
+        stage('Build') {
+            steps {
+                 sh '''
+                 ls
+                 mvn clean package -DskipTests
+                 '''   // Compile Java project using Maven
             }
+        }
+
+        stage('Test') {
+            steps {
+                 sh '''
+                 ls
+                 mvn test
+                 '''  
+            }
+        }
+       stage('Test Report') {
+            steps {
+                junit '**/target/surefire-reports/*.xml'  // Publish JUnit test results
+            }
+        }
+stage('Artifactory Deployment') {
+            steps {
+                 script { 
+                 sh '''
+                    mvn deploy 
+                    '''
+                    }            
+            }
+        }
+
+         stage('Deploy to Tomcat') {
+             steps {
+            withCredentials([sshUserPrivateKey(credentialsId: 'tomcat', keyFileVariable: 'private_key', usernameVariable: 'username')]) {
+               sh '''
+                ls
+              scp -i $private_key -o StrictHostKeyChecking=no -r target/NumberGuessGame*.war ec2-user@172.31.17.145:/home/ec2-user/apache-tomcat-7.0.94/webapps/
+                 '''
+              }
+             }
+         }
     }
+
+post {
+            success{
+                echo 'Build and deployment successful'
+            }
+            failure{
+                echo 'Build failed, check logs for details'
+            }
+        }
+}
