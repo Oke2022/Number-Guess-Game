@@ -24,15 +24,15 @@ pipeline {
                 junit '**/target/surefire-reports/*.xml'  // Publish JUnit test results
             }
         }
-//stage('Artifactory Deployment') {
-//            steps {
-//                 script { 
- //                sh '''
-//                    mvn deploy
-//                    '''
-  //                  }            
-  //          }
-//        }
+stage('Artifactory Deployment') {
+            steps {
+                 script { 
+                 sh '''
+                    mvn deploy --settings /var/lib/jenkins/.m2/settings.xml
+                    '''
+                    }            
+            }
+        }
 
          stage('Deploy to Tomcat') {
              steps {
