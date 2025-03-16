@@ -19,6 +19,14 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                 sh '''
+                 ls
+                 mvn test
+                 '''  
+            }
+        }
        stage('Test Report') {
             steps {
                 junit '**/target/surefire-reports/*.xml'  // Publish JUnit test results
