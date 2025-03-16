@@ -19,7 +19,7 @@ pipeline {
             steps {
                     git branch: 'main', 
                     credentialsId: 'github', 
-                    url: 'https://github.com/Bervelyn123/Number-Guess-Game.git'
+                    url: 'https://github.com/Oke2022/Number-Guess-Game.git'
             }
         }
 
@@ -39,15 +39,22 @@ pipeline {
         }
 stage('Artifactory Deployment') {
             steps {
-                 sh 'mvn deploy'
+                 script { 
+                 sh '''
+                    mvn deploy
+                    '''
+                    }            
             }
         }
 
-        // stage('Deploy to Tomcat') {
-        //     steps {
-        // scp -i /home/ec2-user/KeyThree.pem target/*.jar ec2-user@98.84.168.229:/home/ec2-user/apache-tomcat-7.0.94/webapps
-        //     }
-        // }
+         stage('Deploy to Tomcat') {
+             steps {
+               withCredentials([sshUserPrivateKey(credentialsId: 'tomcat', keyFileVariable: 'private_key', usernameVariable: 'username')]) {
+               scp -i $private_key -r *.jar username@172.31.17.145:/home/ec2-user/apache-tomcat-7.0.94/webapps
+}
+         
+             }
+         }
     }
 
 post {
