@@ -46,7 +46,7 @@ stage('Artifactory Deployment') {
              steps {
                withCredentials([sshUserPrivateKey(credentialsId: 'tomcat', keyFileVariable: 'private_key', usernameVariable: 'username')]) {
                sh '''
-              scp -i $private_key target/*.war -o StrictHostKeyChecking=no $username@172.31.17.145:/home/ec2-user/apache-tomcat-7.0.94/webapps/
+              scp -i **** target/*.war -o StrictHostKeyChecking=no ec2-user@172.31.17.145:/home/ec2-user/apache-tomcat-7.0.94/webapps/
                  '''
               }
              }
