@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    environment {
+    // environment {
         // JAVA_HOME = "/usr/lib/jvm/java-11-openjdk"
         // PATH = "${JAVA_HOME}/bin:${PATH}"
 
@@ -9,7 +9,7 @@ pipeline {
        //  NEXUS_CREDENTIALS = credentials('nexus-credentials')
        // NEXUS_URL = 'http://nexus_server:8081/repository/maven-releases/'
         // MAVEN_OPTS = "-Dmaven.test.failure.ignore=true"
-    }
+   // }
 
 //  triggers {
 //         githubPush()  // Triggers on GitHub push
