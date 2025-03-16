@@ -10,7 +10,7 @@ pipeline {
             }
         }
 
-        stage('Build and Test') {
+        stage('Build') {
             steps {
                  sh '''
                  ls
