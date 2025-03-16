@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // JAVA_HOME = "/usr/lib/jvm/java-11-openjdk"
-        // PATH = "${JAVA_HOME}/bin:${PATH}" hjk
+        // PATH = "${JAVA_HOME}/bin:${PATH}"
 
         SONARQUBE_SERVER = 'sonarqube'
         NEXUS_CREDENTIALS = credentials('nexus-credentials')
