@@ -37,6 +37,11 @@ pipeline {
                sh 'mvn test'  // Run tests
             }
         }
+stage('Artifactory Deployment') {
+            steps {
+                 sh 'mvn deploy'
+            }
+        }
 
         // stage('Deploy to Tomcat') {
         //     steps {
