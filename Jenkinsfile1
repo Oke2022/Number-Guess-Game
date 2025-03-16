@@ -19,7 +19,7 @@ pipeline {
             steps {
                     git branch: 'main', 
                     credentialsId: 'github', 
-                    url: 'https://github.com/Bervlyn123/Number-Guess-Game.git'
+                    url: 'https://github.com/Bervelyn123/Number-Guess-Game.git'
             }
         }
 
