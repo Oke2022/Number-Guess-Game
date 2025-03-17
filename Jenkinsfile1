@@ -36,7 +36,8 @@ stage('Artifactory Deployment') {
             steps {
                  script { 
                  sh '''
-                    mvn deploy 
+                    mvn clean deploy -U
+
                     '''
                     }            
             }
